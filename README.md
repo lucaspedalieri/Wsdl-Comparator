@@ -1,5 +1,3 @@
 # Wsdl-Comparator
 
-wkfcbhsdcfbksdbfvwrwhnfowrrjngrg
-+
-bfuwebfwernfg
+
