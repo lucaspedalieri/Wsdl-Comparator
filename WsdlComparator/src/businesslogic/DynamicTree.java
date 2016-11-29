@@ -1,5 +1,6 @@
 package businesslogic;
 
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -23,14 +24,13 @@ import javax.swing.event.PopupMenuListener;
 import javax.swing.event.TreeModelEvent;
 import javax.swing.event.TreeModelListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeCellRenderer;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import javax.swing.tree.TreeSelectionModel;
-
-import view.Main;
 
 public class DynamicTree extends JPanel {
 	protected JPanel ParentPanel;
@@ -147,7 +147,7 @@ public class DynamicTree extends JPanel {
 	}
 
 	public void setCellRenderer(TreeCellRenderer render) {
-		tree.setCellRenderer(render);
+		tree.setCellRenderer(render);		
 	}
 
 	public void expandAllRootTree() {
@@ -179,7 +179,7 @@ public class DynamicTree extends JPanel {
 			for (Enumeration e = node.children(); e.hasMoreElements();) {
 				TreeNode n = (TreeNode) e.nextElement();
 				TreePath path = parent.pathByAddingChild(n);
-				if (tree.isCollapsed(path) && isAll) {
+				if (tree.isCollapsed(path) || isAll) {
 					expand(path, isAll);
 				}
 			}
@@ -198,7 +198,7 @@ public class DynamicTree extends JPanel {
 			for (Enumeration e = node.children(); e.hasMoreElements();) {
 				TreeNode n = (TreeNode) e.nextElement();
 				TreePath path = parent.pathByAddingChild(n);
-				if (tree.isExpanded(path) && isAll) {
+				if (tree.isExpanded(path) || isAll) {
 					collapse(path, isAll);
 				}
 			}
@@ -286,7 +286,7 @@ public class DynamicTree extends JPanel {
 		}
 
 		protected Object doInBackground() {
-//			((Main) ParentPanel).showLoading();
+			// ((Main) ParentPanel).showLoading();
 			Object result = null;
 			try {
 				if (TypeOperation != -1) {
@@ -320,17 +320,20 @@ public class DynamicTree extends JPanel {
 		protected void done() {
 			super.done();
 			try {
-//				((Main) ParentPanel).hideLoading();
-//				Object result = get();
-//				if (result instanceof Boolean) {
-//					if ((boolean) result) {
-//						JOptionPane.showMessageDialog(getRootPane(), "Operation performed successfully");
-//					} else {
-//						JOptionPane.showMessageDialog(getRootPane(), "Operation failed");
-//					}
-//				} else if (result instanceof Exception) {
-//					JOptionPane.showMessageDialog(getRootPane(), ((Exception) result).getMessage());
-//				}
+				// ((Main) ParentPanel).hideLoading();
+				// Object result = get();
+				// if (result instanceof Boolean) {
+				// if ((boolean) result) {
+				// JOptionPane.showMessageDialog(getRootPane(), "Operation
+				// performed successfully");
+				// } else {
+				// JOptionPane.showMessageDialog(getRootPane(), "Operation
+				// failed");
+				// }
+				// } else if (result instanceof Exception) {
+				// JOptionPane.showMessageDialog(getRootPane(), ((Exception)
+				// result).getMessage());
+				// }
 			} catch (Exception e) {
 				JOptionPane.showMessageDialog(getRootPane(), e.getMessage());
 			} finally {

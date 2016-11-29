@@ -268,7 +268,7 @@ public class Main extends JPanel implements ActionListener {
 		});
 		radioPanel.add(rbUrl);
 
-		btnPathWsdl1 = new JButton("Select Wsdl 1");
+		btnPathWsdl1 = new JButton("Select Wsdl 1 (Old Version)");
 		urlPanel.add(btnPathWsdl1);
 		btnPathWsdl1.setActionCommand(CHOOSE_FILE_WSDL_1);
 		btnPathWsdl1.addActionListener(this);
@@ -277,7 +277,7 @@ public class Main extends JPanel implements ActionListener {
 		urlPanel.add(txtPathWsdl1);
 		txtPathWsdl1.setColumns(10);
 
-		btnPathWsdl2 = new JButton("Select Wsdl 2");
+		btnPathWsdl2 = new JButton("Select Wsdl 2 (New Version)");
 		urlPanel.add(btnPathWsdl2);
 		btnPathWsdl2.setActionCommand(CHOOSE_FILE_WSDL_2);
 		btnPathWsdl2.addActionListener(this);
@@ -298,7 +298,7 @@ public class Main extends JPanel implements ActionListener {
 			}
 		}
 
-		lblUrlWsdl1 = new JLabel("Url Wsdl 1");
+		lblUrlWsdl1 = new JLabel("Url Wsdl 1 (Old Version)");
 		urlPanel.add(lblUrlWsdl1);
 
 		txtUrlWsdl1 = new JTextField();
@@ -306,7 +306,7 @@ public class Main extends JPanel implements ActionListener {
 		urlPanel.add(txtUrlWsdl1);
 		txtUrlWsdl1.setColumns(10);
 
-		lblUrlWsdl2 = new JLabel("Url Wsdl 2");
+		lblUrlWsdl2 = new JLabel("Url Wsdl 2 (New Version)");
 		urlPanel.add(lblUrlWsdl2);
 
 		txtUrlWsdl2 = new JTextField();
