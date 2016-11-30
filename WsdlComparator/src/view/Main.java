@@ -134,6 +134,23 @@ public class Main extends JPanel implements ActionListener {
 	private JLabel lblUrlWsdl2;
 	private JTextField txtUrlWsdl2;
 
+	private JPanel infoPanel;
+	private JLabel lblInfo;
+	private JPanel infoBtnPanel;
+	private JButton btnLinkedin;
+	private JButton btnGitHub;
+	private JButton btnWebSite;
+	private JPanel actionTreePanel;
+	private JButton btnSaveDifference;
+	private JLabel lblInfoLib;
+	private JLabel lblInfoTree;
+	private JButton btnStopCompare;
+
+	private int widthUrlPanel;
+	private int heightUrlPanel;
+	private int widthTreePanel;
+	private int heightTreePanel;
+
 	/**
 	 * Create the GUI and show it. For thread safety, this method should be
 	 * invoked from the event-dispatching thread. @throws
@@ -148,11 +165,11 @@ public class Main extends JPanel implements ActionListener {
 			Main newContentPane = new Main();
 			newContentPane.setOpaque(true); // content panes must be opaque
 			frame.setContentPane(newContentPane);
-					
+
 			InputStream imgStream = Main.class.getResourceAsStream("logo.png");
-			BufferedImage myImg = ImageIO.read(imgStream);			
+			BufferedImage myImg = ImageIO.read(imgStream);
 			frame.setIconImage(myImg);
-			
+
 			// Display the window.
 			frame.pack();
 			frame.setVisible(true);
@@ -411,22 +428,6 @@ public class Main extends JPanel implements ActionListener {
 		selectionUrl();
 	}
 
-	int widthUrlPanel;
-	int heightUrlPanel;
-	int widthTreePanel;
-	int heightTreePanel;
-	private JPanel infoPanel;
-	private JLabel lblInfo;
-	private JPanel infoBtnPanel;
-	private JButton btnLinkedin;
-	private JButton btnGitHub;
-	private JButton btnWebSite;
-	private JPanel actionTreePanel;
-	private JButton btnSaveDifference;
-	private JLabel lblInfoLib;
-	private JLabel lblInfoTree;
-	private JButton btnStopCompare;
-
 	@SuppressWarnings("static-access")
 	public void showLoading() {
 		widthUrlPanel = urlPanel.WIDTH;
@@ -459,7 +460,7 @@ public class Main extends JPanel implements ActionListener {
 								preference.setPreference(FILE_WSDL_1, file.getPath());
 							} else {
 								JOptionPane.showMessageDialog(getRootPane(), "Select valid wsdl");
-							}							
+							}
 						}
 					}
 				}
@@ -500,20 +501,23 @@ public class Main extends JPanel implements ActionListener {
 						int returnVal = FileChooser.showSaveDialog(Main.this);
 
 						if (returnVal == JFileChooser.APPROVE_OPTION) {
-							String filePath = FileChooser.getSelectedFile().getPath();
-							if (filePath != null && !filePath.isEmpty()) {
-								if (!filePath.contains(".txt")) {
-									if (filePath.contains(".")) {
-										String[] splitResult = filePath.split("\\.");
-										filePath = splitResult[0] + ".txt";
+							String parentPath = FileChooser.getSelectedFile().getParent();
+							String fileName = FileChooser.getSelectedFile().getName();
+							if (fileName != null && !fileName.isEmpty()) {
+								if (!fileName.contains(".txt")) {
+									if (fileName.contains(".")) {
+										String[] splitResult = fileName.split("\\.");
+										fileName = splitResult[0] + ".txt";
 									} else {
-										filePath += ".txt";
+										fileName += ".txt";
 									}
 								}
+								String filePath = parentPath + "\\" + fileName;
 								FileManager fileManager = new FileManager();
 								fileManager.writeFile(filePath, dumpDifference);
 							}
-						}
+							JOptionPane.showMessageDialog(getRootPane(), "Operation performed successfully");
+						}						
 					} else {
 						JOptionPane.showMessageDialog(getRootPane(), "Elements not found");
 					}
@@ -642,7 +646,7 @@ public class Main extends JPanel implements ActionListener {
 				}
 
 				if (differences != null && !differences.isEmpty()) {
-					for (Difference diff : differences) {						
+					for (Difference diff : differences) {
 						dumpDifference.add(diff.dump());
 						DefaultMutableTreeNode node = treePanel.addObject(null, diff.getDescription());
 						createTree(node, diff.getDiffs());
