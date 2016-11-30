@@ -504,20 +504,30 @@ public class Main extends JPanel implements ActionListener {
 							String parentPath = FileChooser.getSelectedFile().getParent();
 							String fileName = FileChooser.getSelectedFile().getName();
 							if (fileName != null && !fileName.isEmpty()) {
-								if (!fileName.contains(".txt")) {
-									if (fileName.contains(".")) {
-										String[] splitResult = fileName.split("\\.");
-										fileName = splitResult[0] + ".txt";
-									} else {
-										fileName += ".txt";
+								if (fileName.contains(".")) {
+									String[] splitResult = fileName.split("\\.");
+									String checkedName = "";
+									for (int i = 0; i < splitResult.length; i++) {
+										if (i == splitResult.length - 1) {
+											if (splitResult[i].equals("txt")) {
+												checkedName += "txt";
+											} else {
+												checkedName += splitResult[i] + ".txt";
+											}
+										} else {
+											checkedName += splitResult[i] + ".";
+										}
 									}
+									fileName = checkedName;
+								} else {
+									fileName += ".txt";
 								}
 								String filePath = parentPath + "\\" + fileName;
 								FileManager fileManager = new FileManager();
 								fileManager.writeFile(filePath, dumpDifference);
 							}
 							JOptionPane.showMessageDialog(getRootPane(), "Operation performed successfully");
-						}						
+						}
 					} else {
 						JOptionPane.showMessageDialog(getRootPane(), "Elements not found");
 					}
